@@ -7,13 +7,20 @@ const Button = ({handleClick, text}) => (
     </button>
 )
 
-const Statistics = (props) => {
+const Statistics = ({good, neutral, bad}) => {
+    const all = good + neutral + bad
+    const average = (good + (-1 * bad)) / all
+    const positive = good / all * 100
+
     return (
         <>
             <h1>statistics</h1>
-            <div>good {props.good}</div>
-            <div>neutral {props.neutral}</div>
-            <div>bad {props.bad}</div>
+            <div>good {good}</div>
+            <div>neutral {neutral}</div>
+            <div>bad {bad}</div>
+            <div>all {all}</div>
+            <div>average {average}</div>
+            <div>positive {positive} %</div>
         </>
     )
 }
