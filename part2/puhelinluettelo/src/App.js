@@ -9,6 +9,10 @@ const App = () => {
     const addName = (e) => {
         e.preventDefault()
 
+        if (persons.map(person => person.name).includes(newName)) {
+            alert(`${newName} is aleady added to phonebook`)
+            return
+        }
         const newPerson = {name: newName}
         setPersons(persons.concat(newPerson))
         setNewName('')
