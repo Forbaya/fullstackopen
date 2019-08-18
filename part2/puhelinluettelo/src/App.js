@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const App = () => {
     const [persons, setPersons] = useState([
@@ -22,6 +22,7 @@ const App = () => {
         const newPerson = {name: newName, number: newNumber}
         setPersons(persons.concat(newPerson))
         setNewName('')
+        setNewNumber('')
 
         updateFilteredPersons()
     }
@@ -36,15 +37,15 @@ const App = () => {
 
     const handleFilterChange = (e) => {
         setFilter(e.target.value)
-        updateFilteredPersons()
     }
 
     const updateFilteredPersons = () => {
         const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
-        //console.log(filter)
-        //console.log(filteredPersons)
         setFilteredPersons(filteredPersons)
     }
+
+    useEffect(() => updateFilteredPersons(), [filter])
+    useEffect(() => updateFilteredPersons(), [persons])
 
     return (
         <div>
@@ -71,7 +72,6 @@ const App = () => {
             )}
         </div>
   )
-
 }
 
 export default App
