@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Country = ({filteredCountries}) => {
+const Country = ({filteredCountries, setFilteredCountries}) => {
     const render = () => {
         if (filteredCountries.length > 10) {
             return <div>Too many matches, specify another filter</div>
@@ -8,7 +8,6 @@ const Country = ({filteredCountries}) => {
 
         if (filteredCountries.length === 1) {
             const country = filteredCountries[0]
-            console.log(country)
 
             return (
                 <div>
@@ -26,10 +25,18 @@ const Country = ({filteredCountries}) => {
             )
         }
 
+        const showHandler = (alpha3Code) => {
+            const country = filteredCountries.find(c => c.alpha3Code === alpha3Code)
+            setFilteredCountries([country])
+        }
+
         return (
             <div>
                 {filteredCountries.map(country =>
-                    <div key={country.name}>{country.name}</div>
+                    <div key={country.name}>
+                        <span>{country.name}</span>
+                        <button onClick={() => showHandler(country.alpha3Code)}>show</button>
+                    </div>
                 )}
             </div>
         )
