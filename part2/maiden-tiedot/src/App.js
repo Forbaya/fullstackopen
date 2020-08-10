@@ -24,8 +24,6 @@ const App = () => {
             })
     }, [])
 
-
-
     return (
         <div>
             filter countries <input value={filter} onChange={handleFilterChange} />
