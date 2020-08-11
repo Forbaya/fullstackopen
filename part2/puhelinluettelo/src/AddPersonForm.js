@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from "axios"
 
 const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, setNewNumber}) => {
     const addPerson = (e) => {
@@ -8,10 +9,17 @@ const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, set
             alert(`${newName} is aleady added to phonebook`)
             return
         }
+
+        const url = 'http://localhost:3001/persons'
         const newPerson = {name: newName, number: newNumber}
-        setPersons(persons.concat(newPerson))
-        setNewName('')
-        setNewNumber('')
+
+        axios.post(url, newPerson)
+            .then(response => {
+                setPersons(persons.concat(response.data))
+                setNewName('')
+                setNewNumber('')
+            })
+
     }
 
     const handleNameChange = (e) => {
