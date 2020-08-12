@@ -3,7 +3,7 @@ import React from 'react'
 import personService from './PersonService'
 
 const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, setNewNumber}) => {
-    const addPerson = (e) => {
+    const addPerson = e => {
         e.preventDefault()
 
         if (persons.map(person => person.name).includes(newName)) {
@@ -22,11 +22,11 @@ const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, set
             })
     }
 
-    const handleNameChange = (e) => {
+    const handleNameChange = e => {
         setNewName(e.target.value)
     }
 
-    const handleNumberChange = (e) => {
+    const handleNumberChange = e => {
         setNewNumber(e.target.value)
     }
 

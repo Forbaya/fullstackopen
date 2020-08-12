@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 import personService from './PersonService'
@@ -38,7 +37,7 @@ const App = () => {
                            newNumber={newNumber} setNewNumber={setNewNumber}/>
             <h2>Numbers</h2>
             {filteredPersons.map(person =>
-                <Person key={person.name} person={person}/>
+                <Person key={person.id} person={person} persons={persons} setPersons={setPersons}/>
             )}
         </div>
   )
