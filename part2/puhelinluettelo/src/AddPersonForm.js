@@ -7,19 +7,29 @@ const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, set
         e.preventDefault()
 
         if (persons.map(person => person.name).includes(newName)) {
-            alert(`${newName} is aleady added to phonebook`)
-            return
+            const result = window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)
+            if (result) {
+                const person = persons.find(p => p.name === newName)
+
+                personService
+                    .updateNumber(person, newNumber)
+                    .then(updatedPerson => {
+                        setPersons(persons.filter(p => p.name !== newName).concat(updatedPerson))
+                        setNewName('')
+                        setNewNumber('')
+                    })
+            }
+        } else {
+            const newPerson = {name: newName, number: newNumber}
+
+            personService
+                .create(newPerson)
+                .then(returnedPerson => {
+                    setPersons(persons.concat(returnedPerson))
+                    setNewName('')
+                    setNewNumber('')
+                })
         }
-
-        const newPerson = {name: newName, number: newNumber}
-
-        personService
-            .create(newPerson)
-            .then(returnedPerson => {
-                setPersons(persons.concat(returnedPerson))
-                setNewName('')
-                setNewNumber('')
-            })
     }
 
     const handleNameChange = e => {
