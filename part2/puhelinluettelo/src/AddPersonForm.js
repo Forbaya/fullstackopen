@@ -29,7 +29,12 @@ const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, set
                     setPersons(persons.concat(returnedPerson))
                     setNewName('')
                     setNewNumber('')
-                    setNotification(`Added ${newName}`)
+
+                    const notification = {
+                        type: 'info',
+                        message: `Added ${newName}`
+                    }
+                    setNotification(notification)
 
                     setTimeout(() => {
                         setNotification(null)

@@ -33,7 +33,7 @@ const App = () => {
     return (
         <div>
             <h2>Phone book</h2>
-            <Notification message={notification}/>
+            <Notification notification={notification}/>
             <Filter filter={filter} setFilter={setFilter}/>
             <AddPersonForm
                 persons={persons}
@@ -46,7 +46,13 @@ const App = () => {
             />
             <h2>Numbers</h2>
             {filteredPersons.map(person =>
-                <Person key={person.id} person={person} persons={persons} setPersons={setPersons}/>
+                <Person
+                    key={person.id}
+                    person={person}
+                    persons={persons}
+                    setPersons={setPersons}
+                    setNotification={setNotification}
+                />
             )}
         </div>
   )
