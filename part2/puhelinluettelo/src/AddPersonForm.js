@@ -2,7 +2,8 @@ import React from 'react'
 
 import personService from './PersonService'
 
-const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, setNewNumber}) => {
+const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, setNewNumber,
+                           setNotification, setError}) => {
     const addPerson = e => {
         e.preventDefault()
 
@@ -28,6 +29,11 @@ const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, set
                     setPersons(persons.concat(returnedPerson))
                     setNewName('')
                     setNewNumber('')
+                    setNotification(`Added ${newName}`)
+
+                    setTimeout(() => {
+                        setNotification(null)
+                    }, 5000)
                 })
         }
     }

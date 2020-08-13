@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
 import personService from './PersonService'
-
 import Filter from "./Filter";
 import AddPersonForm from "./AddPersonForm";
 import Person from "./Person";
+import Notification from "./Notification"
 
 const App = () => {
     const [persons, setPersons] = useState([])
@@ -12,6 +12,7 @@ const App = () => {
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [filter, setFilter] = useState('')
+    const [notification, setNotification] = useState(null)
 
     useEffect(() => {
         personService
@@ -32,9 +33,17 @@ const App = () => {
     return (
         <div>
             <h2>Phone book</h2>
+            <Notification message={notification}/>
             <Filter filter={filter} setFilter={setFilter}/>
-            <AddPersonForm persons={persons} setPersons={setPersons} newName={newName} setNewName={setNewName}
-                           newNumber={newNumber} setNewNumber={setNewNumber}/>
+            <AddPersonForm
+                persons={persons}
+                setPersons={setPersons}
+                newName={newName}
+                setNewName={setNewName}
+                newNumber={newNumber}
+                setNewNumber={setNewNumber}
+                setNotification={setNotification}
+            />
             <h2>Numbers</h2>
             {filteredPersons.map(person =>
                 <Person key={person.id} person={person} persons={persons} setPersons={setPersons}/>
