@@ -23,7 +23,11 @@ const App = () => {
     }, [])
 
     const updateFilteredPersons = () => {
-        const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(filter.toLowerCase()))
+        const filteredPersons = persons.filter(
+            person => person.name
+                .toLowerCase()
+                .includes(filter.toLowerCase())
+        )
         setFilteredPersons(filteredPersons)
     }
 

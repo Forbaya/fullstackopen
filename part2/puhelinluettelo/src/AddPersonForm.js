@@ -19,14 +19,17 @@ const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, set
                         setNewName('')
                         setNewNumber('')
                     })
+                    .catch(error => {
+                        showError(error)
+                    })
             }
         } else {
             const newPerson = {name: newName, number: newNumber}
 
             personService
                 .create(newPerson)
-                .then(returnedPerson => {
-                    setPersons(persons.concat(returnedPerson))
+                .then(createdPerson => {
+                    setPersons(persons.concat(createdPerson))
                     setNewName('')
                     setNewNumber('')
 
@@ -40,7 +43,23 @@ const AddPersonForm = ({persons, setPersons, newName, setNewName, newNumber, set
                         setNotification(null)
                     }, 5000)
                 })
+                .catch(error => {
+                    showError(error)
+                })
         }
+    }
+
+    const showError = error => {
+        const notification = {
+            type: 'error',
+            message: error.response.data.error,
+        }
+
+        setNotification(notification)
+
+        setTimeout(() => {
+            setNotification(null)
+        }, 5000)
     }
 
     const handleNameChange = e => {
