@@ -2,7 +2,7 @@ const listHelper = require('../utils/list_helper')
 
 const emptyList = []
 
-const listWithOneBlog = [
+const oneBlog = [
     {
         _id: '5a422aa71b54a676234d17f8',
         title: 'Go To Statement Considered Harmful',
@@ -74,10 +74,32 @@ describe('total likes', () => {
     })
 
     test('when list has only one blog, equals the likes of that', () => {
-        expect(listHelper.totalLikes(listWithOneBlog)).toBe(5)
+        expect(listHelper.totalLikes(oneBlog)).toBe(5)
     })
 
     test('of a bigger list is calculated right', () => {
         expect(listHelper.totalLikes(blogs)).toBe(36)
+    })
+})
+
+describe('favourite blog', () => {
+    test('when list has only one blog, equals the blog', () => {
+        const favouriteBlog = {
+            title: 'Go To Statement Considered Harmful',
+            author: 'Edsger W. Dijkstra',
+            likes: 5,
+        }
+
+        expect(listHelper.favouriteBlog(oneBlog)).toEqual(favouriteBlog)
+    })
+
+    test('of a big list is the one with most likes', () => {
+        const favouriteBlog = {
+            title: "Canonical string reduction",
+            author: "Edsger W. Dijkstra",
+            likes: 12
+        }
+
+        expect(listHelper.favouriteBlog(blogs)).toEqual(favouriteBlog)
     })
 })
